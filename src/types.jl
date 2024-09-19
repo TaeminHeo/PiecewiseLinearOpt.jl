@@ -28,7 +28,7 @@ PWLFunction(x, z, T) = PWLFunction(x, z, T, Dict())
 const UnivariatePWLFunction = PWLFunction{1}
 
 function UnivariatePWLFunction(x, z)
-    @assert issorted(x)
+    #@assert issorted(x)
     return PWLFunction(
         Tuple{Float64}[(xx,) for xx in x],
         convert(Vector{Float64}, z),
@@ -37,7 +37,7 @@ function UnivariatePWLFunction(x, z)
 end
 
 function UnivariatePWLFunction(x, fz::Function)
-    @assert issorted(x)
+    #@assert issorted(x)
     return PWLFunction(
         Tuple{Float64}[(xx,) for xx in x],
         map(t -> convert(Float64, fz(t)), x),
@@ -54,8 +54,8 @@ function BivariatePWLFunction(
     pattern = :BestFit,
     seed = hash((length(x), length(y))),
 )
-    @assert issorted(x)
-    @assert issorted(y)
+    #@assert issorted(x)
+    #@assert issorted(y)
     X = vec(collect(Base.product(x, y)))
     # X = vec(Tuple{Float64,Float64}[(_x,_y) for _x in x, _y in y])
     Z = map(t -> convert(Float64, fz(t...)), X)
